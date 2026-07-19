@@ -39,7 +39,10 @@ ENV PORT=3000
 ENV HOST=0.0.0.0
 ENV API_PREFIX=api
 
+# Ghaymah Cloud expects the container to listen on this port
 EXPOSE 3000
 
+# Use exec form for proper signal handling (SIGTERM) during deploy
 CMD ["node", "dist/src/main.js"]
+
 

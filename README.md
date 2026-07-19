@@ -65,20 +65,62 @@ docker-compose up -d
 ```
 *This spawns a PostgreSQL instance running on port `5432` with database name `copoun`.*
 
-### 2. Configure Environment Variables
-Copy `.env.example` to `.env` and adjust variables if necessary:
-```bash
-cp .env.example .env
-```
-Ensure your database details match the docker container:
+### 2. Configure Environment Variables (Ghaymah Cloud)
+This service expects configuration to be provided via environment variables in the Ghaymah Cloud panel (preferred) or at runtime. **Do not hardcode secrets** in the repository.
+
+Set these variables in Ghaymah Cloud:
+
 ```env
-DATABASE_HOST=localhost
+# App
+PORT=3000
+HOST=0.0.0.0
+API_PREFIX=api
+APP_NAME=CouponHub API
+APP_VERSION=1.0.0
+DEFAULT_LOCALE=ar
+SUPPORTED_LOCALES=ar,en
+
+# Database (PostgreSQL)
+DATABASE_HOST=YOUR_DB_HOST
 DATABASE_PORT=5432
-DATABASE_USER=postgres
-DATABASE_PASSWORD=12345
-DATABASE_NAME=copoun
+DATABASE_USER=YOUR_DB_USER
+DATABASE_PASSWORD=YOUR_DB_PASSWORD
+DATABASE_NAME=YOUR_DB_NAME
+DATABASE_SSL=false
 DATABASE_MIGRATIONS_RUN=true
+DATABASE_LOGGING=false
+
+# Auth (JWT)
+JWT_ACCESS_SECRET=REPLACE_WITH_STRONG_RANDOM_SECRET
+JWT_ACCESS_TTL=15m
+JWT_REFRESH_SECRET=REPLACE_WITH_STRONG_RANDOM_SECRET
+JWT_REFRESH_TTL=30d
+PASSWORD_RESET_TTL=15m
+
+# Swagger (optional)
+SWAGGER_ENABLED=true
+SWAGGER_PATH=api/docs
+SWAGGER_DESCRIPTION=CouponHub Syria MVP API documentation
+
+# CORS (optional)
+ALLOWED_ORIGINS=
+
+# Media (optional)
+MEDIA_DRIVER=local
+MEDIA_LOCAL_PATH=uploads
+MEDIA_PUBLIC_BASE_URL=
+
+# Feature flags (optional)
+FEATURE_CAMPAIGN_COPILOT=false
+FEATURE_SMART_SEARCH=false
+FEATURE_TRUST_SHIELD=false
+FEATURE_IMPACT_METRICS=false
+FEATURE_OFFLINE_REDEMPTION=false
+
+# Optional AI integration (only if used)
+GEMINI_API_KEY=
 ```
+
 
 ### 3. Install Dependencies
 ```bash
