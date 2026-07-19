@@ -20,8 +20,8 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 
 COPY --from=builder /app/dist ./dist
+# uploads are usually mounted as a volume at runtime
 RUN mkdir -p uploads
-COPY --from=builder /app/uploads ./uploads
 
 ENV PORT=3000
 ENV HOST=0.0.0.0

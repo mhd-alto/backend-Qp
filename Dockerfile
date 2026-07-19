@@ -31,8 +31,8 @@ COPY --from=builder /app/dist ./dist
 
 # Needed for serving static uploads
 # (keeps directory present even if empty)
+# uploads are usually mounted as a volume at runtime
 RUN mkdir -p uploads
-COPY --from=builder /app/uploads ./uploads
 
 # Helpful defaults (override with docker-compose / env)
 ENV PORT=3000
